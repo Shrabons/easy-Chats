@@ -9,8 +9,13 @@ module.exports = {
       },
       colors: {
         heading: "#11175D",
-        borderline: "#B8B9CE",
+        borderline: "#BDBDBD",
         primary: "#5F35F5",
+        secondary: "#F5F5F5"
+      },
+      backgroundImage: {
+        backgroundleft: "url('../public/images/bg-left.png')",
+        backgroundright: "url('../public/images/bg-right.png')",
       }
 
 

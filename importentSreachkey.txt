@@ -1,0 +1,2 @@
+1. email validate regex JavaScript
+1. password validate regex JavaScript
