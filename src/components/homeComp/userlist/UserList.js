@@ -66,9 +66,11 @@ const UserLists = () => {
         setFirend(arr)
       });
   },[])
-  let heandleSearch = (e) =>{
-  let searchArr = []
 
+
+  // searching function working 
+  let heandleSearch = (e) =>{
+    let searchArr = []
   if(e.target.value.length == 0){
     setSearchfriend([])
   }else{

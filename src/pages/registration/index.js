@@ -70,6 +70,7 @@ const Registration = () => {
         if(email && fullname && password && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
             setLoading(true)
             createUserWithEmailAndPassword(auth, email, password).then((users)=>{
+                console.log(users)
                 updateProfile(auth.currentUser,{
                     displayName: fullname,
                     photoURL: 'images/profile.png'
@@ -87,7 +88,8 @@ const Registration = () => {
                     console.log(users)
                     set(ref(db, 'users/' + users.user.uid), {
                         username: users.user.displayName,
-                        email: users.user.email, 
+                        email: users.user.email,
+                        imgurl: users.user.photoURL ,
                     })
                 })
                 

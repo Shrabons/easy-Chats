@@ -58,7 +58,10 @@ let handleUnBlockFrient = (item) =>{
             <h3 className='font-nunito font-semibold text-lg mb-4'>Blocked Users</h3>
             <BsThreeDotsVertical className='absolute text-lg top-[6px] right-[0px]' />
             <div className=''>
-                {blockuser.map((item, index)=>(
+                {blockuser.length == 0 ?
+                <p className=' mt-2 bg-red-400 text-white px-5 py-4 rounded'>NO Bloker user Available</p>
+                :
+                blockuser.map((item, index)=>(
                     <div key={index} className="flex gap-x-6 items-center border-b-2 pb-3 mb-3">
                         <div className="w-1/6">
                             <img src="images/group1.png" alt="group1" />
@@ -74,7 +77,9 @@ let handleUnBlockFrient = (item) =>{
                             }
                         </div>
                     </div>
-                ))}
+                ))
+                }
+                
                 
                 
             </div>

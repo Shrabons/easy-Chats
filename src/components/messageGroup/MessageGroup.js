@@ -1,11 +1,13 @@
 
 import { getDatabase, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { activeChat } from "../../slices/userSlice";
 
 
 const MessageGroup = () => {
     const db = getDatabase();
+    const dispatch = useDispatch()
 
     let [mygroup, setMygroup] = useState([])
     let data = useSelector((state)=> state.getInitialState.userInfo)
@@ -25,6 +27,15 @@ const MessageGroup = () => {
         });
     },[]) 
 
+    let handleActiveGroupChat = (item) => {
+        console.log(item)
+        dispatch(activeChat({
+            status:"group", 
+            id: item.key,
+            name: item.groupname,
+            adminid: item.adminid
+        }));
+    }
 
 
   return (
@@ -34,7 +45,7 @@ const MessageGroup = () => {
        <div className=''>
         {
             mygroup.map((item, index)=>(
-                <div key={index} className="flex gap-x-6 items-center border-b-2 pb-3 mb-3">
+                <div onClick={()=> handleActiveGroupChat(item)} key={index} className="flex gap-x-6 items-center border-b-2 pb-3 mb-3">
                     <div className="w-1/6">
                         <img src="images/group1.png" alt="group1" />
                     </div>
