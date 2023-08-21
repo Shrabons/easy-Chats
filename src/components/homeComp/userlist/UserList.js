@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const UserLists = () => {
     const db = getDatabase();
     let data = useSelector((state)=> state.getInitialState.userInfo)
+    console.log(data)
     
 
     let [userlist, setUserlist] = useState([])
@@ -34,8 +35,10 @@ const UserLists = () => {
         set(push(ref(db, 'firendrequest/' )), {
             sendername: data.displayName,
             senderid: data.uid,
+            senderimg: data.photoURL,
             recivername: item.username,
-            reciverid : item.userid
+            reciverid : item.userid,
+            reciverimg: item.imgurl
           });
     }
 
@@ -91,7 +94,7 @@ const UserLists = () => {
 }
     
   return (
-    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[347px] overflow-y-scroll'>
+    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[365px] overflow-y-scroll'>
         <div className='relative'>
             <h3 className='font-nunito font-semibold text-lg mb-4'>User Lists</h3>
             <BsThreeDotsVertical className='absolute text-lg top-[6px] right-[0px]' />
@@ -102,7 +105,7 @@ const UserLists = () => {
               searchfriend.map((item, index)=>(
                 <div key={index} className="flex gap-x-2 items-center border-b-2 pb-3 mb-3">
                     <div className="w-1/5">
-                        <img src="images/group1.png" alt="group1" />
+                        <img className="w-[70px] h-[70px] rounded-full" src={item.imgurl} alt="group1" />
                     </div>
                     <div className="w-3/5">
                         <h3 className='font-nunito font-semibold text-lg'>{item.username} </h3>
@@ -128,7 +131,7 @@ const UserLists = () => {
                 userlist.map((item, index)=>(
                   <div key={index} className="flex gap-x-2 items-center border-b-2 pb-3 mb-3">
                       <div className="w-1/5">
-                          <img src="images/group1.png" alt="group1" />
+                          <img className="w-[70px] h-[70px] rounded-full" src={item.imgurl} alt="group1" />
                       </div>
                       <div className="w-3/5">
                           <h3 className='font-nunito font-semibold text-lg'>{item.username} </h3>

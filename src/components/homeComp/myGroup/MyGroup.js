@@ -98,7 +98,7 @@ const MyGroup = () => {
     }
     
   return (
-    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[347px] overflow-y-scroll'>
+    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[365px] overflow-y-scroll'>
         <div className='relative'>
             <h3 className='font-nunito font-semibold text-lg mb-4'>My Groups</h3>
             {show && 
@@ -149,7 +149,7 @@ const MyGroup = () => {
                                 <h3 className='font-nunito font-semibold text-lg capitalize'>{item.username}</h3>
                             </div>
                             <div className="w-2/5 flex">
-                            <button onClick={()=>handleGroupAccept(item)} className='bg-primary py-2 px-3 text-sm font-semibold text-white rounded ml-1'>Accept</button>
+                            
                             <button onClick={()=>handleGroupReject(item)} className='bg-red-500 py-2 px-3 text-sm font-semibold text-white rounded ml-1'>Reject</button>
                             </div>
                         </div>

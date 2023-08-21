@@ -1,5 +1,6 @@
 import "cropperjs/dist/cropper.css";
 import { getAuth, signOut, updateProfile } from "firebase/auth";
+import { getDatabase, set, ref as storRef } from "firebase/database";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import React, { useState } from "react";
 import Cropper from "react-cropper";
@@ -13,12 +14,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { userLogindata } from "../../slices/userSlice";
 
 
-
 const Sidebar = ({active}) => {
     const auth = getAuth();
     const storage = getStorage();
     let dispatch = useDispatch()
     let navigate = useNavigate()
+    const db = getDatabase();
 
     let data = useSelector((state)=> state.getInitialState.userInfo)
    
@@ -90,6 +91,12 @@ const Sidebar = ({active}) => {
                         setImage("")
                         setCropData("")
                         setCropper("")
+                    }).then(()=>{
+                        set(storRef(db, 'users/' + auth.currentUser.uid), {
+                            email: auth.currentUser.email,
+                            username: auth.currentUser.displayName,
+                            imgurl: downloadURL ,
+                        })
                     })
                 });
             });
@@ -101,7 +108,7 @@ const Sidebar = ({active}) => {
   return (
     <div className='bg-primary h-screen rounded-xl pt-10 pl-6 pr-0'>
         <div className="group relative profile m-auto  w-[100px] h-[100px] rounded-full">
-            <img className='m-auto w-full h-full rounded-full' src={data.photoURL} alt="profile images" loading="lazy" />
+            <img className='m-auto w-full h-full rounded-full' src={auth.currentUser.photoURL} alt="profile images" loading="lazy" />
             <h2 className=" font-nunito font-bold  text-md mt-2 text-white text-center ">{data.displayName}</h2>
 
             <div onClick={handleImgUpload} className="w-[100px] h-[100px] rounded-full bg-[rgba(0,0,0,.5)] opacity-0 group-hover:opacity-100 absolute top-0 left-0 flex justify-center items-center">
@@ -116,11 +123,11 @@ const Sidebar = ({active}) => {
             <Link to="/message"><AiFillMessage className={`m-auto text-5xl z-[1]  ${active == "msg" ? "text-primary" : "text-white"}` }  /></Link>
             
         </div>
-        <div className=" mt-24 pr-5  relative z-[1] after:z-[-1] after:pl-9 after:[content('')] after:bg-none after:w-full after:h-[88px] after:absolute after:top-[-16px] after:left-0 after:rounded-tl-xl after:rounded-bl-xl before:[content[''] before:w-[8px] before:h-[89px] before:bg-primary before:absolute before:top-[-17px] before:right-0 before:rounded-tl-2xl before:rounded-bl-2xl">
-            <IoMdNotificationsOutline className='m-auto text-5xl z-[1] text-[#BAD1FF]'  />
+        <div className={`mt-24 pr-5  relative z-[1] after:z-[-1] after:pl-9 after:[content('')] ${active == "notification" && "after:bg-white"}  after:w-full after:h-[88px] after:absolute after:top-[-16px] after:left-0 after:rounded-tl-xl after:rounded-bl-xl before:[content[''] before:w-[8px] before:h-[89px] before:bg-primary before:absolute before:top-[-17px] before:right-0 before:rounded-tl-2xl before:rounded-bl-2xl`}>
+            <Link to="/notification"><IoMdNotificationsOutline className={`m-auto text-5xl z-[1]  ${active == "notification" ? "text-primary" : "text-white"}` }  /></Link>
         </div>
-        <div className=" mt-24 pr-5  relative z-[1] after:z-[-1] after:pl-9 after:[content('')] after:bg-none after:w-full after:h-[88px] after:absolute after:top-[-16px] after:left-0 after:rounded-tl-xl after:rounded-bl-xl before:[content[''] before:w-[8px] before:h-[89px] before:bg-primary before:absolute before:top-[-17px] before:right-0 before:rounded-tl-2xl before:rounded-bl-2xl">
-            <AiOutlineSetting className='m-auto text-5xl z-[1] text-[#BAD1FF]'  />
+        <div className={`mt-24 pr-5  relative z-[1] after:z-[-1] after:pl-9 after:[content('')] ${active == "settings" && "after:bg-white"}  after:w-full after:h-[88px] after:absolute after:top-[-16px] after:left-0 after:rounded-tl-xl after:rounded-bl-xl before:[content[''] before:w-[8px] before:h-[89px] before:bg-primary before:absolute before:top-[-17px] before:right-0 before:rounded-tl-2xl before:rounded-bl-2xl`}>
+            <Link to="/settings"><AiOutlineSetting className={`m-auto text-5xl z-[1]  ${active == "settings" ? "text-primary" : "text-white"}` }  /></Link>
         </div>
         <div onClick={handleLogout} className=" mt-24 pr-5  relative z-[1] after:z-[-1] after:pl-9 after:[content('')] after:bg-none after:w-full after:h-[88px] after:absolute after:top-[-16px] after:left-0 after:rounded-tl-xl after:rounded-bl-xl before:[content[''] before:w-[8px] before:h-[89px] before:bg-primary before:absolute before:top-[-17px] before:right-0 before:rounded-tl-2xl before:rounded-bl-2xl">
             <FiLogOut className='m-auto text-5xl z-[1] text-[#BAD1FF]'  />

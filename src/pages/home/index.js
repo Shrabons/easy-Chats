@@ -1,10 +1,9 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import FriendRequest from '../../components/homeComp/FriendRequest/FriendRequest'
 import GroupRequest from '../../components/homeComp/GroupRequest/GroupRequest'
-import Search from '../../components/homeComp/Search'
 import Sidebar from '../../components/homeComp/Sidebar'
 import BlockUsers from '../../components/homeComp/blockUsers/BlockUsers'
 import Friend from '../../components/homeComp/friend/Friend'
@@ -42,7 +41,6 @@ const Home = () => {
         <Sidebar active="home"  />
         </div>
         <div className="w-[527px]">
-          <Search />
           <GroupRequest />
           <FriendRequest />
         </div>
@@ -56,7 +54,11 @@ const Home = () => {
         </div>
        </>
        :
-       <h1 className='bg-primary font-lg'>please verifie email !</h1>
+       <div className="bg-primary w-full h-screen flex justify-center items-center flex-col">
+          <h1 className='bg-primary text-2xl text-white underline'>please verifie email !</h1>
+          <Link className="bg-[#B46BF0] mt-8 px-5 py-2 rounded-lg font-bold" to="/login">Login</Link>
+       </div>
+       
       }
     
     </div>

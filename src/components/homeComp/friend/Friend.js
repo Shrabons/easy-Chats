@@ -48,8 +48,11 @@ let handleBlock = (item) =>{
         set(push(ref(db, 'blocks/')), {
             blockid: item.reciverid,
             block: item.recivername,
+            blockimg: item.reciverimg,
             blockbyid: item.senderid,
-            blockbyname: item.sendername
+            blockbyname: item.sendername,
+            blockbyimg: item.senderimg
+            
           }).then(()=>{
             remove(ref(db, 'firends/' + item.key))
           });
@@ -59,8 +62,10 @@ let handleBlock = (item) =>{
         set(push(ref(db, 'blocks/')), {
             blockid: item.senderid ,
             block: item.sendername ,
+            blockimg:item.senderimg,
             blockbyid: item.reciverid,
-            blockbyname: item.recivername
+            blockbyname: item.recivername,
+            blockbyimg: item.reciverimg,
           }).then(()=>{
             remove(ref(db, 'firends/' + item.key))
           });
@@ -70,17 +75,17 @@ let handleBlock = (item) =>{
 
   let handleActiveSignle = (item) => {
     if(item.reciverid == data.uid){
-      dispatch(activeChat({status:"single", id: item.senderid, name: item.sendername}));
-      localStorage.setItem("activeChatname",JSON.stringify({status:"single",id: item.senderid, name: item.sendername}))
+      dispatch(activeChat({status:"single", id: item.senderid, name: item.sendername, imgUlr: item.senderimg}));
+      localStorage.setItem("activeChatname",JSON.stringify({status:"single",id: item.senderid, name: item.sendername, imgUlr: item.senderimg}))
     }else{
-      dispatch(activeChat({status:"single", id: item.reciverid, name: item.recivername}));
+      dispatch(activeChat({status:"single", id: item.reciverid, name: item.recivername, imgUlr: item.reciverimg}));
       // localStorage.setItem("activeChatname",JSON.stringify({status:"single", id: item.reciverid, name: item.recivername}))
       
     }
   }
 
   return (
-    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[347px] overflow-y-scroll'>
+    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[360px] overflow-y-scroll'>
         <div className='relative'>
             <h3 className='font-nunito font-semibold text-lg mb-4'>Friend </h3>
             <BsThreeDotsVertical className='absolute text-lg top-[6px] right-[0px]' />
@@ -90,7 +95,7 @@ let handleBlock = (item) =>{
 
                 <div onClick={()=> handleActiveSignle(item)} key={index} className="flex gap-x-6 items-center border-b-2 pb-3 mb-3">
                     <div className="w-1/5">
-                        <img src="images/group1.png" alt="group1" />
+                        <img className="w-[70px] h-[70px] rounded-full" src={data.uid == item.senderid ? item.reciverimg: item.senderimg} alt="group1" />
                     </div>
                     <div className="w-2/5">
                         <h3 className='font-nunito font-semibold text-lg'>

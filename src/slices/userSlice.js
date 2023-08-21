@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    userInfo: localStorage.getItem("userEasychat") ? JSON.parse(localStorage.getItem("userEasychat")) : null,
+    userInfo: localStorage.getItem("userEasychat") ? JSON.parse(localStorage.getItem("userEasychat")) : "check",
     active: localStorage.getItem("activeChatname") ? JSON.parse(localStorage.getItem("activeChatname")) : "check",
   },
 

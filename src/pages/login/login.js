@@ -65,7 +65,6 @@ const Login = () => {
         } */
         if(email  && password && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
             setLoading(true)
-           
             signInWithEmailAndPassword(auth, email, password).then((loginUser)=>{
                 setLoading(false)
                 const user = loginUser.user
@@ -77,7 +76,6 @@ const Login = () => {
                 },2000)
             }).catch((err)=>{
                 const errorCode = err.code
-                console.log(errorCode)
                 if(errorCode.includes("auth/user-not-found")){
                     setEmailerr("email not found")
                     setLoading(false)

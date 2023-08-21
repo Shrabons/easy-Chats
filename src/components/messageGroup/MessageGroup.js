@@ -33,13 +33,14 @@ const MessageGroup = () => {
             status:"group", 
             id: item.key,
             name: item.groupname,
-            adminid: item.adminid
+            adminid: item.adminid,
+            imgUlr: "images/group1.png"
         }));
     }
 
 
   return (
-    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[347px] overflow-y-scroll'>
+    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[365px] overflow-y-scroll'>
         <div className='relative'>
         <h3 className='font-nunito font-semibold text-lg mb-4'>Groups Request</h3>
        <div className=''>

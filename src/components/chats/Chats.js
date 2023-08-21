@@ -19,7 +19,6 @@ const Chats = () => {
 
 
     const storage = getStorage();
-
     const db = getDatabase();
     let [camerashow , setCamerShow] = useState(false)
     let [captureimg , setCaptureimg] = useState("")
@@ -35,7 +34,7 @@ const Chats = () => {
     const data = useSelector((state) => state.reducer.userInfo)
     const activeChatName = useSelector((state) => state.reducer.active)
    
-    console.log(activeChatName.adminid)
+    console.log(activeChatName)
     console.log(data.uid)
 
    
@@ -137,6 +136,38 @@ const Chats = () => {
         }
 
         
+      }
+
+      let handleThumupSend = () =>{
+        console.log('thumup')
+        if(activeChatName.status == "single"){
+            
+            set(push(ref(db, 'singlemsg/')), {
+            whosendid: data.uid,
+            whosendname: data.displayName,
+            whoreciveid: activeChatName.id,
+            whorecivename: activeChatName.name,
+            msg: '&#128077;',
+            date: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()} ${new Date().getHours()} : ${new Date().getMinutes()}`
+            }).then(()=>{
+                setMsgsingle("")
+            });
+            
+            
+        }else{
+            set(push(ref(db, 'groupmsg/')), {
+                whosendid: data.uid,
+                whosendname: data.displayName,
+                whoreciveid: activeChatName.id,
+                whorecivename: activeChatName.name,
+                adminid: activeChatName.adminid,
+                msg: "&#128077;",
+                date: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()} ${new Date().getHours()} : ${new Date().getMinutes()}`
+              }).then(()=>{
+                  setMsgsingle("")
+              });
+              console.log( "ami group msg theke aseci")
+        }
       }
 
 // single sms niye asa data theke 
@@ -265,6 +296,7 @@ const addAudioElement = (blob) => {
     setAudioUrl(url)
     setBlob(blob)
 
+
   };
 
 // single msg  audio submit data base function working 
@@ -316,7 +348,7 @@ const addAudioElement = (blob) => {
  }
 
  let handleEmojiCase =(emojis)=>{
-    console.log(emojis.emoji)
+    // console.log(emojis.emoji)
     setMsgsingle(msgsingle+emojis.emoji)
  }
 
@@ -325,7 +357,7 @@ const addAudioElement = (blob) => {
         <div className='flex items-center gap-x-8 border-b border-solid border-[rgba(0,0,0,.25)] pb-6 relative mb-14'>
             <BsThreeDotsVertical className='text-2xl absolute top-[36px] right-[0px] text-primary' />
             <div className="imag w-[80px] h-[80px] rounded-full shadow-lg relative">
-                <img className='w-full' src="images/group3.png" alt="" />
+                <img className=' w-[80px] h-[80px] rounded-full' src={activeChatName.imgUlr} alt="" />
                 <div className="w-[17px] h-[17px] rounded-full bg-green-400 border-2 border-solid border-black absolute bottom-[16px] right-[-4px]"></div>
             </div>
             <div className="title">
@@ -342,7 +374,7 @@ const addAudioElement = (blob) => {
                         item.msg ?
                         <div className='mb-8 text-right '>
                             <div className='bg-primary inline-block py-3 px-10 rounded-md relative mx-5'>
-                                <p className='font-pop font-medium text-base text-white text-left'>{item.msg}</p>
+                                <p dangerouslySetInnerHTML={{__html: item.msg}}  className='font-pop font-medium text-base text-white text-left'></p>
                                 <BsTriangleFill className='text-2xl absolute bottom-[-1.4px] right-[-10px]  text-primary' />
                             </div>
                             <p className=' mr-5 font-pop ml-5 font-medium text-sm mt-1  text-[rgba(0,0,0,.25)]'>{moment(item.date, "YYYYMMDD hh:mm").fromNow()}</p>
@@ -369,7 +401,7 @@ const addAudioElement = (blob) => {
                         item.msg ?
                         <div className='mb-8'>
                             <div className='bg-[#F1F1F1] inline-block py-3 px-10 rounded-md relative mx-5'>
-                                <p className='font-pop font-medium text-base text-black'>{item.msg}</p>
+                                <p dangerouslySetInnerHTML={{__html: item.msg}} className='font-pop font-medium text-base text-black'></p>
                                 <BsTriangleFill className='text-2xl absolute bottom-[-1.5px] left-[-10px]  text-[#F1F1F1] ' />
                             </div>
                             <p className='font-pop ml-5 font-medium text-sm mt-1 text-[rgba(0,0,0,.25)]'>{moment(item.date, "YYYYMMDD hh:mm").fromNow()}</p>
@@ -403,7 +435,7 @@ const addAudioElement = (blob) => {
                             item.whoreciveid == activeChatName.id &&
                             <div className='mb-8 text-right '>
                                 <div className='bg-primary inline-block py-3 px-10 rounded-md relative mx-5'>
-                                    <p className='font-pop font-medium text-base text-white text-left'>{item.msg}</p>
+                                    <p dangerouslySetInnerHTML={{__html: item.msg}}  className='font-pop font-medium text-base text-white text-left'></p>
                                     <BsTriangleFill className='text-2xl absolute bottom-[-1.4px] right-[-10px]  text-primary' />
                                 </div>
                                 <p className=' mr-5 font-pop ml-5 font-medium text-sm mt-1  text-[rgba(0,0,0,.25)]'>{moment(item.date, "YYYYMMDD hh:mm").fromNow()}</p>
@@ -434,7 +466,7 @@ const addAudioElement = (blob) => {
                             item.whoreciveid == activeChatName.id &&
                             <div className='mb-8'>
                                 <div className='bg-[#F1F1F1] inline-block py-3 px-10 rounded-md relative mx-5'>
-                                    <p className='font-pop font-medium text-base text-black'>{item.msg}</p>
+                                    <p dangerouslySetInnerHTML={{__html: item.msg}} className='font-pop font-medium text-base text-black'></p>
                                     <BsTriangleFill className='text-2xl absolute bottom-[-1.5px] left-[-10px]  text-[#F1F1F1] ' />
                                 </div>
                                 <p className='font-pop ml-5 font-medium text-sm mt-1 text-[rgba(0,0,0,.25)]'>{moment(item.date, "YYYYMMDD hh:mm").fromNow()}</p>
@@ -568,6 +600,7 @@ const addAudioElement = (blob) => {
         { activeChatName.status == "single" ?
         <div className=' flex mt-8 gap-x-5'>
             <div className="w-[90%] relative">
+            
                 {!audioUrl && 
                 <>
                     <input value={msgsingle} onChange={hanldemsgCase} onKeyUp={handleEnterPress} type="text" className='bg-[#f1f1f1] p-3 pr-[123px]  w-full rounded-lg'  />
@@ -584,6 +617,7 @@ const addAudioElement = (blob) => {
                     }
                     
                     <AudioRecorder
+                        // onClick={handlerecorder}
                         onRecordingComplete={addAudioElement}
                         audioTrackConstraints={{
                         noiseSuppression: true,
@@ -637,7 +671,11 @@ const addAudioElement = (blob) => {
                     </div>
                 }
             {!audioUrl &&
+            
+            msgsingle ?
             <button onClick={handleMsgSend} className='bg-primary py-3 px-6 rounded-lg '><BsFillSendFill className='text-2xl text-white' /></button>
+            :
+            <button onClick={handleThumupSend} className='bg-primary py-1 px-6 rounded-lg text-2xl'>&#128077;</button>
             }
         </div>
         :
@@ -713,7 +751,11 @@ const addAudioElement = (blob) => {
                     </div>
                 }
             {!audioUrl &&
+            msgsingle ?
             <button onClick={handleMsgSend} className='bg-primary py-3 px-6 rounded-lg '><BsFillSendFill className='text-2xl text-white' /></button>
+            :
+            <button onClick={handleThumupSend} className='bg-primary py-1 px-6 rounded-lg text-2xl'>&#128077;</button>
+            
             }
         </div>
         :

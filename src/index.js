@@ -12,9 +12,12 @@ import Forgotpassword from './pages/forgotpassword';
 import Home from './pages/home';
 import Login from './pages/login/login';
 import Messages from './pages/Messages/Messages';
+import Notification from './pages/notifications/Notification';
 import Registration from './pages/registration';
+import Settings from './pages/settings/Settings';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+
 
 
 const router = createBrowserRouter([
@@ -37,6 +40,14 @@ const router = createBrowserRouter([
   {
     path: "/message",
     element: <Messages />,
+  },
+  {
+    path: "/notification",
+    element: <Notification />,
+  },
+  {
+    path: "/settings",
+    element: <Settings />,
   },
 ]);
 
