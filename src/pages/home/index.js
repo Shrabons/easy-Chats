@@ -16,11 +16,18 @@ const Home = () => {
   let dispatch = useDispatch()
   let navigate = useNavigate()
   let data = useSelector((state)=>state.reducer.userInfo)
+  console.log(data)
   
   let [emailVerifie, setEmailVerifie] = useState(false)
 
+
+  useEffect(()=>{
+    if(!data){
+      navigate("/login")
+    }
+  },[])
+
   onAuthStateChanged(auth, (user)=>{
-    
     if(user.emailVerified){
       setEmailVerifie(true)
       dispatch(userLogindata(user))
@@ -28,11 +35,7 @@ const Home = () => {
     }
   })
 
-  useEffect(()=>{
-    if(!data){
-      navigate("/login")
-    }
-  },[])
+  
   return (
     <div className='flex gap-11'>
       {emailVerifie ? 
