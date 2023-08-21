@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import React, { useEffect, useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -5,9 +6,10 @@ import { useSelector } from "react-redux";
 
 
 const UserLists = () => {
+    const auth = getAuth()
     const db = getDatabase();
     let data = useSelector((state)=> state.getInitialState.userInfo)
-    console.log(data)
+    console.log(data.photoURL)
     
 
     let [userlist, setUserlist] = useState([])
@@ -35,7 +37,7 @@ const UserLists = () => {
         set(push(ref(db, 'firendrequest/' )), {
             sendername: data.displayName,
             senderid: data.uid,
-            senderimg: data.photoURL,
+            senderimg: auth.currentUser.photoURL,
             recivername: item.username,
             reciverid : item.userid,
             reciverimg: item.imgurl
