@@ -21,11 +21,7 @@ const Home = () => {
   let [emailVerifie, setEmailVerifie] = useState(false)
 
 
-  useEffect(()=>{
-    if(!data){
-      navigate("/login")
-    }
-  },[])
+
 
   onAuthStateChanged(auth, (user)=>{
     if(user.emailVerified){
@@ -34,7 +30,11 @@ const Home = () => {
       localStorage.setItem("userEasychat",JSON.stringify(user))
     }
   })
-
+  useEffect(()=>{
+    if(!data){
+      navigate("/login")
+    }
+  },[])
   
   return (
     <div className='flex gap-11'>

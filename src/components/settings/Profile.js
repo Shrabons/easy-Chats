@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth"
 import React from 'react'
 import { BiHelpCircle } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
@@ -6,16 +7,17 @@ import { RiMessage2Fill } from "react-icons/ri"
 
 
 const Profile = () => {
+    const auth = getAuth();
   return (
     <div className='h-[650px] shadow-lg mt-10 p-8 rounded-xl'>
         <h2 className='text-[30px] text-nunito capitalize font-bold mb-8'>Profile Settings</h2>
         <div  className="flex gap-x-6 items-center border-b-2 pb-3 mb-3">
             <div className="w-1/5">
-                <img className="w-[100px] h-[100px] rounded-full" src="images/profile.png" alt="group1" />
+                <img className="w-[100px] h-[100px] rounded-full" src={auth.currentUser.photoURL} alt="group1" />
             </div>
             <div className="w-2/5">
                 <h3 className='font-nunito font-bold text-2xl capitalize'>
-                shrabon sarker
+                {auth.currentUser.displayName}
                 </h3>
                 <p className='font-nunito font-normal text-sm text-[#4D4D4D]'>Stay home stay safe</p>
             </div>

@@ -29,7 +29,9 @@ const FriendRequest = () => {
           }).then(()=>{
             remove(ref(db, 'firendrequest/' + item.id))
           });
-        
+    }
+    let handleFirendDelete =(item)=> {
+      remove(ref(db, 'firendrequest/' + item.id))
     }
   return (
     <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[365px] overflow-y-scroll'>
@@ -52,6 +54,7 @@ const FriendRequest = () => {
                     </div>
                     <div className="w-1/5">
                         <button onClick={()=>handleFirendAccept(item)}  className='bg-primary py-2 px-5 text-lg font-semibold text-white rounded-lg '> Accept</button>
+                        <button onClick={()=>handleFirendDelete(item)}  className='bg-red-400 py-2 px-5 text-lg font-semibold text-white rounded-lg '>delete</button>
                     </div>
                 </div>
             ))
