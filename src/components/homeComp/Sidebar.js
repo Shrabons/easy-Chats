@@ -106,7 +106,7 @@ const Sidebar = ({active}) => {
       };
 
   return (
-    <div className='bg-primary h-screen rounded-xl pt-10 pl-6 pr-0'>
+    <div className='bg-red-500 h-screen rounded-xl pt-10 pl-6 pr-0'>
         <div className="group relative profile m-auto  w-[100px] h-[100px] rounded-full">
             <img className='m-auto w-full h-full rounded-full' src={auth.currentUser.photoURL} alt="profile images" loading="lazy" />
             <h2 className=" font-nunito font-bold  text-md mt-2 text-white text-center ">{data.displayName}</h2>
