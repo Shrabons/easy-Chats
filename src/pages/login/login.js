@@ -103,7 +103,7 @@ const Login = () => {
             console.log(result)
             setTimeout(()=>{
                 navigate("/")
-            },1000)
+            },3000)
         })
     }
   return (
