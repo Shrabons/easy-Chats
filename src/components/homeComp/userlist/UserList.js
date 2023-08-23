@@ -37,7 +37,7 @@ const UserLists = () => {
         set(push(ref(db, 'firendrequest/' )), {
             sendername: data.displayName,
             senderid: data.uid,
-            senderimg: auth.currentUser.photoURL,
+            senderimg: data.photoURL,
             recivername: item.username,
             reciverid : item.userid,
             reciverimg: item.imgurl
