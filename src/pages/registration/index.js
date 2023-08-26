@@ -73,7 +73,7 @@ const Registration = () => {
                 console.log(users)
                 updateProfile(auth.currentUser,{
                     displayName: fullname,
-                    photoURL: 'images/profile.png'
+                    photoURL: 'images/profile-img.png'
                 }).then(()=>{
                     toast.success("registration Successfull . Please check varifation email !")
                     setEmail("")

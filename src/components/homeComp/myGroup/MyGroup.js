@@ -80,6 +80,10 @@ const MyGroup = () => {
     let handleGroupReject = (item) =>{
         remove(ref(db, 'groupjoinrequest/' + item.key))
     }
+    let handleGroupMembersReject = (item) =>{
+        remove(ref(db, 'groupnembers/' + item.key))
+        console.log(item)
+    }
 
     // groupnembers callection coming data 
     let handleGroupAllMembers = (memberitem) =>{
@@ -150,7 +154,7 @@ const MyGroup = () => {
                             </div>
                             <div className="w-2/5 flex">
                             
-                            <button onClick={()=>handleGroupReject(item)} className='bg-red-500 py-2 px-3 text-sm font-semibold text-white rounded ml-1'>Reject</button>
+                            <button onClick={()=>handleGroupMembersReject(item)} className='bg-red-500 py-2 px-3 text-sm font-semibold text-white rounded ml-1'>Reject</button>
                             </div>
                         </div>
                     ))

@@ -9,6 +9,7 @@ import BlockUsers from '../../components/homeComp/blockUsers/BlockUsers'
 import Friend from '../../components/homeComp/friend/Friend'
 import MyGroup from '../../components/homeComp/myGroup/MyGroup'
 import UserLists from '../../components/homeComp/userlist/UserList'
+import Storys from "../../components/storys/Storys"
 import { userLogindata } from "../../slices/userSlice"
 
 const Home = () => {
@@ -19,9 +20,6 @@ const Home = () => {
   console.log(data)
   
   let [emailVerifie, setEmailVerifie] = useState(false)
-
-
-
 
   onAuthStateChanged(auth, (user)=>{
     if(user.emailVerified){
@@ -44,6 +42,7 @@ const Home = () => {
         <Sidebar active="home"  />
         </div>
         <div className="w-[527px]">
+          <Storys />
           <GroupRequest />
           <FriendRequest />
         </div>

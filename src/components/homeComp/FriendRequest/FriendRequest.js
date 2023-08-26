@@ -34,7 +34,7 @@ const FriendRequest = () => {
       remove(ref(db, 'firendrequest/' + item.id))
     }
   return (
-    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[365px] overflow-y-scroll'>
+    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[265px] overflow-y-scroll'>
         <div className='relative'>
             <h3 className='font-nunito font-semibold text-lg mb-4'>Friend Request</h3>
             <BsThreeDotsVertical className='absolute text-lg top-[6px] right-[0px]' />

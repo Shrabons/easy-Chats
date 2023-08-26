@@ -71,7 +71,7 @@ const GroupRequest = () => {
     }
 
   return (
-    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[365px] overflow-y-scroll'>
+    <div className='w-full bg-white rounded-lg shadow-lg py-3 px-4 mt-11 h-[265px] overflow-y-scroll'>
         <div className='relative'>
         <h3 className='font-nunito font-semibold text-lg mb-4'>Groups Request</h3>
         <button  type='button' onClick={handleGroupCreateShow} className='font-nunito font-semibold text-md mb-4 absolute  top-[-3px] right-[-4px] bg-primary py-1 px-3  text-white rounded-sm cursor-pointer'>
