@@ -9,7 +9,7 @@ const Storys = () => {
     console.log(data.photoURL)
   return (
     
-    <div className='mt-4 flex  gap-3 overflow-y-scroll h-[160px]   '>
+    <div className='mt-4 flex  gap-3 overflow-x-scroll    '>
         <div className='crate-story h-48 bg-slate-700 w-1/4 rounded-lg overflow-hidden relative'>
             <div>
                 <img className='w-full h-48' src={data.photoURL} alt="" />
